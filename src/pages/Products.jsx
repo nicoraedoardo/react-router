@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ function Products() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Errore nel recupero prodotti:", error);
         setLoading(false);
       });
   }, []);
@@ -33,20 +34,26 @@ function Products() {
       <div className="row">
         {products.map((product) => (
           <div key={product.id} className="col-md-4 mb-4">
-            <div className="card h-100 shadow-sm">
-              <img
-                src={product.image}
-                className="card-img-top p-3"
-                alt={product.title}
-                style={{ height: "200px", objectFit: "contain" }}
-              />
+            {/* Link dinamico verso il dettaglio */}
+            <Link
+              to={`/prodotti/${product.id}`}
+              className="text-decoration-none text-dark"
+            >
+              <div className="card h-100 shadow-sm">
+                <img
+                  src={product.image}
+                  className="card-img-top p-3"
+                  alt={product.title}
+                  style={{ height: "200px", objectFit: "contain" }}
+                />
 
-              <div className="card-body d-flex flex-column">
-                <h6 className="card-title">{product.title}</h6>
+                <div className="card-body d-flex flex-column">
+                  <h6 className="card-title">{product.title}</h6>
 
-                <p className="fw-bold mt-auto">{product.price} €</p>
+                  <p className="fw-bold mt-auto">{product.price} €</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
