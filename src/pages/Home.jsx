@@ -1,7 +1,9 @@
 function Home() {
   return (
-    <div>
-      <h1>Benvenuto nel nostro Shop!</h1>
+    <div className="container mt-5 text-center">
+      <h1 className="display-4">Benvenuto nel nostro Shop</h1>
+      <p className="lead">Scopri i migliori prodotti selezionati per te!</p>
+      <button className="btn btn-primary">Scopri di più</button>
     </div>
   );
 }

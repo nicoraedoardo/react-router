@@ -12,23 +12,44 @@ function Products() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Errore:", error);
+        console.error(error);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>Caricamento...</p>;
+  if (loading) {
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border text-primary"></div>
+        <p>Caricamento prodotti...</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h1>Prodotti</h1>
+    <div className="container mt-5">
+      <h1 className="mb-4">I nostri prodotti</h1>
 
-      {products.map((product) => (
-        <div key={product.id}>
-          <h4>{product.title}</h4>
-          <p>{product.price} €</p>
-        </div>
-      ))}
+      <div className="row">
+        {products.map((product) => (
+          <div key={product.id} className="col-md-4 mb-4">
+            <div className="card h-100 shadow-sm">
+              <img
+                src={product.image}
+                className="card-img-top p-3"
+                alt={product.title}
+                style={{ height: "200px", objectFit: "contain" }}
+              />
+
+              <div className="card-body d-flex flex-column">
+                <h6 className="card-title">{product.title}</h6>
+
+                <p className="fw-bold mt-auto">{product.price} €</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
